@@ -12,8 +12,8 @@ Em construção...
 
 ## ✒️ Autores
 
-Leonardo Patricio.
-Dennys Faccioli.
+Leonardo Patricio.  
+Dennys Faccioli.  
 
-Leonardo Patricio - Dev. - [GitHub](https://github.com/leopatricio)
-Dennys Faccioli - Dev. - [GitHub](https://github.com/dennysfaccioli)
+Leonardo Patricio - Dev. - [GitHub](https://github.com/leopatricio)  
+Dennys Faccioli - Dev. - [GitHub](https://github.com/dennysfaccioli)  
