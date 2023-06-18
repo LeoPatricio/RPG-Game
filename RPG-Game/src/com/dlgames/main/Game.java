@@ -3,11 +3,18 @@ package com.dlgames.main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
+import com.dlgames.entities.Entity;
+import com.dlgames.entities.Player;
+import com.dlgames.graphics.Spritesheet;
 
 public class Game extends Canvas implements Runnable {
 
@@ -15,18 +22,31 @@ public class Game extends Canvas implements Runnable {
 	public static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 240;
-	private final int HEIGTH = 160;
-	private final int SCALE = 3;
+	private final int WIDTH = 400;
+	private final int HEIGTH = 300;
+	private final int SCALE = 2;
 	
 	private BufferedImage image;
+	
+	public List<Entity> entities;
+	public Spritesheet spritesheet;
+	
+
 	
 	//Método responsável pelo dimensionamento da janela
 	
 	public Game() {
 		setPreferredSize(new Dimension (WIDTH*SCALE,HEIGTH*SCALE));
 		initFrame();
+		
+		// Iniciando objetos
 		image = new BufferedImage(WIDTH,HEIGTH,BufferedImage.TYPE_INT_RGB);
+		entities = new ArrayList<Entity>();
+		
+		spritesheet = new Spritesheet("/spritesheet.png");
+		
+		Player player = new Player(0, 0, 32, 32, spritesheet.getSprite(0, 0, 32, 32));
+		entities.add(player);
 	}
 	
 	public void initFrame() {
@@ -61,7 +81,10 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void tick(){
-		
+		for(int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			e.tick();
+		}
 	}	
 	
 	public void render(){
@@ -75,6 +98,12 @@ public class Game extends Canvas implements Runnable {
 		 
 		 g.setColor(new Color(19,19,19));
 		 g.fillRect(0,0,WIDTH,HEIGTH);
+		
+		 for(int i = 0; i < entities.size(); i++) {
+				Entity e = entities.get(i);
+				e.render(g);
+			}
+		 
 		 
 		 g.dispose();
 		 g = bs.getDrawGraphics(); 
