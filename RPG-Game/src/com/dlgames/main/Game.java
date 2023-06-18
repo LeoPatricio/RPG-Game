@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import com.dlgames.entities.Entity;
 import com.dlgames.entities.Player;
 import com.dlgames.graphics.Spritesheet;
+import com.dlgames.world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener{
 
@@ -33,7 +34,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private BufferedImage image;
 	
 	public List<Entity> entities;
-	public Spritesheet spritesheet;
+	public static Spritesheet spritesheet;
+	
+	public static World world;
 	
 	private Player player;
 	
@@ -45,10 +48,11 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		initFrame();
 		
 		// Iniciando objetos
+		
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
-		
 		spritesheet = new Spritesheet("/spritesheet.png");
+		world = new World("/map01.png");
 		player = new Player(0, 0, 32, 32, spritesheet.getSprite(0, 64, 32, 32));
 		entities.add(player);
 	}
@@ -103,6 +107,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		 g.setColor(new Color(19,19,19));
 		 g.fillRect(0,0,WIDTH,HEIGHT);
 		
+		 world.render(g);
 		 for(int i = 0; i < entities.size(); i++) {
 				Entity e = entities.get(i);
 				e.render(g);
